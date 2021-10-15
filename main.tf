@@ -2,14 +2,15 @@ provider "aws" {
   region = "us-west-2"
 }
 
+
 module "ec2_complete" {
-  source  = "terraform-aws-modules/ec2-instance/aws//examples/complete"
+  source  = "terraform-aws-modules/ec2-instance/aws"
   version = "3.2.0"
   name = "visakh-test"
 
   ami                         = "ami-013a129d325529d4d"
   instance_type               = "t2.small"
-  subnet_id                   = ["subnet-06b35b3d07ceec3e2"]
+  subnet_id                   = "subnet-06b35b3d07ceec3e2"
   vpc_security_group_ids      = ["sg-0998437249d92a230"]
   enable_volume_tags = false
   root_block_device = [
