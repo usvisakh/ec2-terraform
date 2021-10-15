@@ -2,25 +2,37 @@ provider "aws" {
   region = "us-west-2"
 }
 
-module "AWSUSE1PRODDC01" {
-  source = "git::ssh://git@gitlab.afonza.com/devops/terraform-modules.git//ec2"
 
-  name     = "visakh-test"
-  image    = "ami-013a129d325529d4d"
-  key_name = "af-visakh-ssm"
+  
+}
+module "ec2_complete" {
+  source  = "terraform-aws-modules/ec2-instance/aws//examples/complete"
+  version = "3.2.0"
+  name = "visakh-test"
 
-  security_groups      = ["sg-0998437249d92a230"]
-  iam_instance_profile = "af-visakh-ssm"
+  ami                         = "ami-013a129d325529d4d"
+  instance_type               = "t2.small"
+  subnet_id                   = ["subnet-06b35b3d07ceec3e2"]
+  vpc_security_group_ids      = ["sg-0998437249d92a230"]
+  enable_volume_tags = false
+  root_block_device = [
+    {
+      encrypted   = true
+      volume_type = "gp3"
+      throughput  = 200
+      volume_size = 50
+      tags = {
+        Name = "my-root-block"
+      }
+    },
+  ]
 
-  subnet = "subnet-06b35b3d07ceec3e2"
-  scaling = {
-    termination_protection = true
-    root_volume_size       = var.root_volume_size
-    instance_type          = "t2.small"
-  }
-
-  tags = {
-    Client       = "test"
-  }
-
+  ebs_block_device = [
+    {
+      device_name = "/dev/sdf"
+      volume_type = "gp3"
+      volume_size = var.root_volume_size
+      throughput  = 200
+    }
+  ]
 }
