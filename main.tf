@@ -2,9 +2,6 @@ provider "aws" {
   region = "us-west-2"
 }
 
-
-  
-}
 module "ec2_complete" {
   source  = "terraform-aws-modules/ec2-instance/aws//examples/complete"
   version = "3.2.0"
