@@ -5,7 +5,7 @@ log_bucket_name     = "visakh-jenkins-sftppp-logs"
 enable_versioning   = false
 enable_logging      = true
 sftp_server_name    = "visakh-sftp-server"
-sftp_user_role_name = "sftp-role-viskh-test"
+sftp_user_role_name = "sftp-role-viskh-testtt"
 
 sftp_users_with_keys = [
   {
