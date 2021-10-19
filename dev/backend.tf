@@ -1,5 +1,4 @@
 terraform {
-  required_version = "~> 0.14.8"
   backend "s3" {
     shared_credentials_file = "~/.aws/credentials"
     bucket                  = "visakhus"
