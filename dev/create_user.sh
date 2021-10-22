@@ -9,3 +9,7 @@ echo $number1
 echo "$number"
 echo "$msg"
 sed -i "$number1"i" $msg" terraform.tfvars
+
+git add terraform.tfvars
+git commit -m "jenkins create user"
+git push origin terraform
